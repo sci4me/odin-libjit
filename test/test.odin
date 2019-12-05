@@ -2,6 +2,8 @@ package libjit
 
 import "core:fmt"
 
+using import "shared:odin-libjit"
+
 main :: proc() {
     init();
     

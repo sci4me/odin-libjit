@@ -7,7 +7,19 @@ else                    do #assert(false); // TODO!!!
 
 @(default_calling_convention="c", link_prefix="jit_")
 foreign libjit {
+    jit_type_void: Type;
+    jit_type_sbyte: Type;
+    jit_type_ubyte: Type;
+    jit_type_short: Type;
+    jit_type_ushort: Type;
     jit_type_int: Type;
+    jit_type_uint: Type;
+    jit_type_long: Type;
+    jit_type_ulong: Type;
+    jit_type_float32: Type;
+    jit_type_float64: Type;
+    jit_type_nfloat: Type;
+    jit_type_void_ptr: Type;
 
     init                                        :: proc() ---;
     uses_interpreter                            :: proc() -> i32 ---;

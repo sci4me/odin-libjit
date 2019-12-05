@@ -4,7 +4,7 @@ import "core:fmt"
 
 main :: proc() {
     init();
-
+    
     ctx := context_create();
     defer context_destroy(ctx);
 
@@ -25,6 +25,4 @@ main :: proc() {
     add := transmute(proc(a, b: i32) -> i32) function_to_closure(fn);
 
     fmt.println(add(4, 2));
-    
-    fmt.println("Done!");
 }

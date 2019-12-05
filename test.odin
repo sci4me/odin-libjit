@@ -12,6 +12,7 @@ main :: proc() {
 
     params := []Type{jit_type_int, jit_type_int};
     signature := type_create_signature(.Cdecl, jit_type_int, &params[0], 2, 1);
+    defer type_free(signature);
     fn := function_create(ctx, signature);
 
     a := value_get_param(fn, 0);

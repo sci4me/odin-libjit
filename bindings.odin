@@ -7,19 +7,19 @@ else                    do #assert(false); // TODO!!!
 
 @(default_calling_convention="c", link_prefix="jit_")
 foreign libjit {
-    jit_type_void: Type;
-    jit_type_sbyte: Type;
-    jit_type_ubyte: Type;
-    jit_type_short: Type;
-    jit_type_ushort: Type;
-    jit_type_int: Type;
-    jit_type_uint: Type;
-    jit_type_long: Type;
-    jit_type_ulong: Type;
-    jit_type_float32: Type;
-    jit_type_float64: Type;
-    jit_type_nfloat: Type;
-    jit_type_void_ptr: Type;
+    type_void: Type;
+    type_sbyte: Type;
+    type_ubyte: Type;
+    type_short: Type;
+    type_ushort: Type;
+    type_int: Type;
+    type_uint: Type;
+    type_long: Type;
+    type_ulong: Type;
+    type_float32: Type;
+    type_float64: Type;
+    type_nfloat: Type;
+    type_void_ptr: Type;
 
     init                                        :: proc() ---;
     uses_interpreter                            :: proc() -> i32 ---;
@@ -227,4 +227,6 @@ foreign libjit {
     insn_memmove                                :: proc(func: Function, dest, src, size: Value) -> i32 ---;
     insn_memset                                 :: proc(func: Function, dest, value, size: Value) -> i32 ---;
     insn_alloca                                 :: proc(func: Function, size: Value) -> Value ---;
+    dump_function                               :: proc(fh: rawptr, func: Function, name: cstring) ---;
+    dump_type                                   :: proc(fh: rawptr, type: Type) ---;
 }

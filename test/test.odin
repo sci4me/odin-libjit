@@ -1,31 +1,31 @@
-package libjit
+package libjittest
 
 import "core:fmt"
 
-using import "shared:odin-libjit"
+import lj "shared:odin-libjit"
 
 main :: proc() {
-    init();
+    lj.init();
     
-    ctx := context_create();
-    defer context_destroy(ctx);
+    ctx := lj.context_create();
+    defer lj.context_destroy(ctx);
 
-    context_build_start(ctx);
+    lj.context_build_start(ctx);
 
-    params := []Type{jit_type_int, jit_type_int};
-    signature := type_create_signature(.Cdecl, jit_type_int, &params[0], 2, 1);
-    defer type_free(signature);
-    fn := function_create(ctx, signature);
+    params := []lj.Type{lj.type_int, lj.type_int};
+    signature := lj.type_create_signature(.Cdecl, lj.type_int, &params[0], 2, 1);
+    defer lj.type_free(signature);
+    fn := lj.function_create(ctx, signature);
 
-    a := value_get_param(fn, 0);
-    b := value_get_param(fn, 1);
-    c := insn_add(fn, a, b);
-    insn_return(fn, c);
+    a := lj.value_get_param(fn, 0);
+    b := lj.value_get_param(fn, 1);
+    c := lj.insn_add(fn, a, b);
+    lj.insn_return(fn, c);
 
-    function_compile(fn);
-    context_build_end(ctx);
+    lj.function_compile(fn);
+    lj.context_build_end(ctx);
 
-    add := transmute(proc(a, b: i32) -> i32) function_to_closure(fn);
+    add := transmute(proc(a, b: i32) -> i32) lj.function_to_closure(fn);
 
     fmt.println(add(4, 2));
 }
